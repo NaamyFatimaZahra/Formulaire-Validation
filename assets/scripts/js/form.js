@@ -8,7 +8,7 @@
       const feedbackInfos = document.getElementById("feedback");
       let genderInfo;
 
-      //validation
+      //validation  of  input
       document.querySelectorAll("input,textarea").forEach((el) => {
         el.addEventListener("input", () => {
           if (el.id === "name") {
