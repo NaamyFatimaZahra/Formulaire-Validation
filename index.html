@@ -10,6 +10,9 @@
     />
   </head>
   <body>
+    <div class="errors p-5">
+      <ul></ul>
+    </div>
     <div class="container mt-5 card" style="width: 50%">
       <div class="p-5">
         <h2 class="card-title text-center text-primary">Form</h2>
@@ -23,12 +26,7 @@
             </div>
             <div class="form-group">
               <label for="age">Age:</label>
-              <input
-                name="number"
-                type="number"
-                id="age"
-                class="form-control"
-              />
+              <input name="number" type="text" id="age" class="form-control" />
             </div>
             <div class="d-flex justify-content-end">
               <button
@@ -97,7 +95,7 @@
           <!-- Section 3 -->
           <div class="section d-none" id="section3">
             <div class="form-group">
-              <label for="feedback" >Feedback:</label>
+              <label for="feedback">Feedback:</label>
               <textarea
                 name="feedback"
                 id="feedback"
@@ -116,54 +114,54 @@
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </div>
-        
-        <!-- section4 -->
-        <div class="section card-title d-none" id="section4">
-          <h2 class="text-center text-uppercase text-primary">
-            your informations
-          </h2>
-          <div class="name pt-5 d-flex align-items-center">
-            <h2>Name:</h2>
-            <p id="name-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="age d-flex align-items-center">
-            <h2>Age:</h2>
-            <p id="age-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="email d-flex align-items-center">
-            <h2>Email:</h2>
-            <p id="email-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="phone d-flex align-items-center">
-            <h2>Phone Number:</h2>
-            <p id="phone-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="phone d-flex align-items-center">
-            <h2>Feedback:</h2>
-            <p id="feedback-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="phone d-flex align-items-center">
-            <h2>Gender:</h2>
-            <p id="gender-info" class="m-0 pl-4"></p>
-          </div>
-          <div class="d-flex justify-content-between">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              onclick="prevSection(3)"
-            >
-              Previous
-            </button>
 
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="confirmation()"
-            >
-              confirmation
-            </button>
+          <!-- section4 -->
+          <div class="section card-title d-none" id="section4">
+            <h2 class="text-center text-uppercase text-primary">
+              your informations
+            </h2>
+            <div class="name pt-5 d-flex align-items-center">
+              <h2>Name:</h2>
+              <p id="name-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="age d-flex align-items-center">
+              <h2>Age:</h2>
+              <p id="age-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="email d-flex align-items-center">
+              <h2>Email:</h2>
+              <p id="email-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="phone d-flex align-items-center">
+              <h2>Phone Number:</h2>
+              <p id="phone-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="phone d-flex align-items-center">
+              <h2>Feedback:</h2>
+              <p id="feedback-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="phone d-flex align-items-center">
+              <h2>Gender:</h2>
+              <p id="gender-info" class="m-0 pl-4"></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="prevSection(3)"
+              >
+                Previous
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="confirmation()"
+              >
+                confirmation
+              </button>
+            </div>
           </div>
-        </div>
         </form>
       </div>
     </div>
@@ -178,127 +176,129 @@
       const phoneInfo = document.getElementById("phone");
       const feedbackInfos = document.getElementById("feedback");
       let genderInfo;
-      let validate = true;
-      
+
       //validation
-     document.querySelectorAll("input").forEach((el) => {
-  el.addEventListener("input", () => {
-    if (el.id === "name") {
-      validateName(el.value);
-    } else if (el.id === "email") {
-     
-validateEmail(el.value);
-    } else if (el.id === "feedback") {
-      validateFeedback(el.value);
-    }
-  });
-});
+      document.querySelectorAll("input").forEach((el) => {
+        el.addEventListener("input", () => {
+          if (el.id === "name") {
+            validateName(el.value);
+          } else if (el.id === "age") {
+            validateAge(el.value);
+          } else if (el.id === "email") {
+            validateEmail(el.value);
+          } else if (el.id === "phone") {
+            validatePhone(el.value);
+          } else if (el.id === "feedback") {
+            validateFeedback(el.value);
+          }
+        });
+      });
 
-
-
-// validate name
-function validateName(name) {
-  const namePattern = /^[A-Za-z\s]+$/; // Only letters and spaces
-  if (!namePattern.test(name)||name.trim() === "") {
-    // Invalid name
-    nameInfo.style.boxShadow = "1px 1px 8px  #b510107a";
-    nameInfo.style.border = ".7px solid #b510107a";
-    validate = false;
-  } else {
-    // Valid name
-    nameInfo.style.boxShadow = "0 0 0 .2rem #28a74533"; 
-    nameInfo.style.border = "1px solid #3fef0a";
-    validate = true;
-  }
-}
-// validate email
-
-function validateEmail(email) {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
-if (email.trim() === "") {
-    // Default style when empty
-    emailInfo.style.boxShadow = "0 0 0 .2rem #007bff40";
-    emailInfo.style.border = "1px solid #80bdff";
-        validate = false;
-
-  } else if (!emailPattern.test(email)) {
-    // Invalid name
-emailInfo.style.boxShadow = "1px 1px 8px  #b510107a";
-    emailInfo.style.border = ".7px solid #b510107a";
-        validate = false;
-
-  } else {
-    // Valid name
-   emailInfo.style.boxShadow = "0 0 0 .2rem #007bff40";
-    emailInfo.style.border = "1px solid #80bdff";
-        validate = true;
-
-  }
-}
-// validate phone
-function validatePhone(phone) {
-  const phonePattern = /^\d+$/; // Basic phone pattern
-  if (phone.trim() === "") {
-    // Default style when empty
-    phoneInfo.style.boxShadow = "0 0 0 .2rem #007bff40";
-    phoneInfo.style.border = "1px solid #80bdff";
-    validate = false;
-
-  } else if (!phonePattern.test(phone)) {
-    // Invalid name
-    phoneInfo.style.boxShadow = "1px 1px 8px  #b510107a";
-    phoneInfo.style.border = ".7px solid #b510107a";
-    validate = false;
-
-  } else {
-    // Valid name
-    phoneInfo.style.boxShadow = "0 0 0 .2rem #007bff40";
-    phoneInfo.style.border = "1px solid #80bdff";
-    validate = true;
-
-  }
-}
-feedbackInfos.addEventListener("keyup",()=>{
- if (feedbackInfos.value.trim() === "") {
-       console.log("not passed");
-    feedbackInfos.style.boxShadow = "1px 1px 8px  #b510107a";
-    feedbackInfos.style.border = ".7px solid #b510107a";
-    validate = false;
-
-  }else{
-    console.log("passed");
-    feedbackInfos.style.boxShadow = "0 0 0 .2rem #007bff40";
-    feedbackInfos.style.border = "1px solid #80bdff";
-    validate = true;
-  }
-})
-// // validate feedback
-// function validateFeedback() {
-  
-  
-  
-
-// }
-
-
+      // validate name
+      function validateName(name) {
+        const namePattern =/^[a-zA-Z ]{2,30}$/; 
+        if (!namePattern.test(name) || name.trim() === "") {
+          nameInfo.style.boxShadow = "1px 1px 8px  #b510107a";
+          nameInfo.style.border = ".7px solid #b510107a";
+          return false;
+        } else {
+          nameInfo.style.boxShadow = "0 0 0 .2rem #28a74533";
+          nameInfo.style.border = "1px solid #3fef0a";
+          return true;
+        }
+      }
+      // validate age
+      function validateAge(age) {
+        const agePattern = /^(1[01][0-9]|[1-9]?[0-9])$/;
+        if (!agePattern.test(age) || age.trim() === "") {
+          ageInfo.style.boxShadow = "1px 1px 8px  #b510107a";
+          ageInfo.style.border = ".7px solid #b510107a";
+          return false;
+        } else {
+          ageInfo.style.boxShadow = "0 0 0 .2rem #28a74533";
+          ageInfo.style.border = "1px solid #3fef0a";
+          return true;
+        }
+      }
+      // validate email
+      function validateEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+        if (email.trim() === "" || !emailPattern.test(email)) {
+          emailInfo.style.boxShadow = "1px 1px 8px  #b510107a";
+          emailInfo.style.border = ".7px solid #b510107a";
+          return false;
+        } else {
+          emailInfo.style.boxShadow = "0 0 0 .2rem #28a74533";
+          emailInfo.style.border = "1px solid #3fef0a";
+          return true;
+        }
+      }
+      // validate phone
+      function validatePhone(phone) {
+        const phonePattern = /^\d+$/; // Basic phone pattern
+        if (!phonePattern.test(phone) || phone.trim() === "") {
+          phoneInfo.style.boxShadow = "1px 1px 8px  #b510107a";
+          phoneInfo.style.border = ".7px solid #b510107a";
+          return false;
+        } else {
+          phoneInfo.style.boxShadow = "0 0 0 .2rem #28a74533";
+          phoneInfo.style.border = "1px solid #3fef0a";
+          return true;
+        }
+      }
+      // validate feedback
+      feedbackInfos.addEventListener("keyup", () => {
+        validateFeedback();
+      });
+      function validateFeedback() {
+        if (feedbackInfos.value.trim() === "") {
+          feedbackInfos.style.boxShadow = "1px 1px 8px  #b510107a";
+          feedbackInfos.style.border = ".7px solid #b510107a";
+          return false;
+        } else {
+          feedbackInfos.style.boxShadow = "0 0 0 .2rem #28a74533";
+          feedbackInfos.style.border = "1px solid #3fef0a";
+          return true;
+        }
+      }
       // show
       function showSection(sectionNumber) {
         document
           .querySelectorAll(".section")
           .forEach((section) => section.classList.add("d-none"));
-        document.getElementById("section" + sectionNumber).classList.remove("d-none");
+        document
+          .getElementById("section" + sectionNumber)
+          .classList.remove("d-none");
       }
-      //  next
-      function nextSection(sectionNumber) {
-        showSection(sectionNumber);
-      }
+  function nextSection(sectionNumber) {
+    let isValid = false;
+    switch (sectionNumber) {
+      
+      case 2:
+        isValid = validateName(nameInfo.value) && validateAge(ageInfo.value);
+        console.log(isValid);
+        break;
+      case 3:
+        isValid = validateEmail(emailInfo.value) && validatePhone(phoneInfo.value);
+        break;
+      case 4:
+        isValid = validateFeedback(feedbackInfos.value);
+        break;
+    }
+
+    if (isValid) {
+      showSection(sectionNumber);
+    } else {
+      alert("Please fill in all the required fields correctly.");
+    }
+  }
       // prev
       function prevSection(sectionNumber) {
         showSection(sectionNumber);
       }
       //  submit
       function submitForm(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault(); 
 
         document.getElementById("name-info").innerHTML = nameInfo.value;
         document.getElementById("age-info").innerHTML = ageInfo.value;
@@ -320,10 +320,9 @@ feedbackInfos.addEventListener("keyup",()=>{
       }
       // confirmation
       function confirmation() {
-        document.getElementById("multiSectionForm").reset(); // Reset form fields
-        showSection(1); // Reset to the first section
+        document.getElementById("multiSectionForm").reset(); 
+        showSection(1);
       }
     </script>
-
   </body>
 </html>
